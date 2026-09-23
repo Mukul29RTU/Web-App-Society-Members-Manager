@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 
 const MemberPDF = ({ members }) => {
     const printRef = useRef(null);
-    console.log("Members in PDF:", members); // Debugging line to check the members prop
+  
     const handlePrint = useReactToPrint({
         contentRef: printRef,
         documentTitle: "Member Report"
@@ -13,6 +13,7 @@ const MemberPDF = ({ members }) => {
         <>
             <button onClick={handlePrint}>
                 Download PDF
+                
             </button>
 
             <div ref={printRef} className="pdf-container">

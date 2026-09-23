@@ -89,6 +89,7 @@ useEffect(() => {
                 <MemberPDF
                     members={members}
                 />
+               
             )}
       <div className="card shadow-sm border-0 rounded-4 overflow-hidden">
         {/* Header Section */}
@@ -98,7 +99,7 @@ useEffect(() => {
               <h3 className="mb-0 fw-bold">समाज के सदस्य</h3>
               <small className="opacity-75">कुल सदस्य: {members.length}</small>
               <button className="btn btn-warning btn-sm ms-3" onClick={() => setShowPdf(true)}>
-                Print PDF
+                PDF
               </button>
             </div>
             <div className="col-12 col-md-8 col-lg-5">
