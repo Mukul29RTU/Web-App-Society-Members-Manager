@@ -151,7 +151,7 @@ const AddMember = () => {
                 <label className="form-label fw-semibold">वार्ड संख्या</label>
                 <input 
                   type="text" name="वार्ड_संख्या" className="form-control" 
-                  placeholder="e.g. 05" required 
+                  placeholder="e.g. 05" 
                   onChange={handleChange} 
                 />
               </div>
@@ -161,7 +161,7 @@ const AddMember = () => {
                 <label className="form-label fw-semibold">संपर्क (मोबाइल)</label>
                 <input 
                   type="tel" name="संपर्क" className="form-control" 
-                  placeholder="10 अंकों का नंबर" required 
+                  placeholder="10 अंकों का नंबर" 
                   onChange={handleChange} 
                 />
               </div>
@@ -180,7 +180,7 @@ const AddMember = () => {
                 <label className="form-label fw-semibold">पहचान</label>
                 <input 
                   type="text" name="पहचान" className="form-control" 
-                  placeholder="पिता/पति का नाम या अन्य पहचान" required 
+                  placeholder="पिता/पति का नाम या अन्य पहचान" 
                   onChange={handleChange} 
                 />
               </div>
@@ -190,7 +190,7 @@ const AddMember = () => {
                 <label className="form-label fw-semibold">पता</label>
                 <textarea 
                   name="पता" className="form-control" rows="2" 
-                  placeholder="स्थायी पता दर्ज करें" required 
+                  placeholder="स्थायी पता दर्ज करें" 
                   onChange={handleChange}
                 ></textarea>
               </div>

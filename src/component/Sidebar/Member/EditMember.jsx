@@ -144,22 +144,22 @@ const EditMember = () => {
 
               <div className="col-md-6">
                 <label className="form-label fw-semibold">संपर्क (मोबाइल)</label>
-                <input type="tel" name="संपर्क" className="form-control" value={formData.संपर्क} required onChange={handleChange} />
+                <input type="tel" name="संपर्क" className="form-control" value={formData.संपर्क} onChange={handleChange} />
               </div>
 
               <div className="col-md-6">
                 <label className="form-label fw-semibold">पहचान</label>
-                <input type="text" name="पहचान" className="form-control" value={formData.पहचान} required onChange={handleChange} />
+                <input type="text" name="पहचान" className="form-control" value={formData.पहचान}  onChange={handleChange} />
               </div>
 
               <div className="col-md-12">
                 <label className="form-label fw-semibold">पता</label>
-                <textarea name="पता" className="form-control" rows="2" value={formData.पता} required onChange={handleChange}></textarea>
+                <textarea name="पता" className="form-control" rows="2" value={formData.पता}  onChange={handleChange}></textarea>
               </div>
 
               <div className="col-md-12">
                 <label className="form-label fw-semibold">Email Address</label>
-                <textarea name="email" className="form-control" rows="2" value={formData.email} required onChange={handleChange}></textarea>
+                <textarea name="email" className="form-control" rows="2" value={formData.email} onChange={handleChange}></textarea>
               </div>
 
               <div className="col-12 mt-4 text-end">

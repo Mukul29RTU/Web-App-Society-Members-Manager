@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../utils/api";
 import { FaSortNumericDown, FaChevronRight, FaSpinner } from "react-icons/fa";
 import { useAuth } from "../../../context/AuthContext";
+import MemberPDF from "./MemberPDF";
+
 
 const MembersTable = () => {
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ const MembersTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedWard, setSelectedWard] = useState("All");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [showPdf, setShowPdf] = useState(false);
 
   // Fetch All Data on Mount
 useEffect(() => {
@@ -52,6 +55,7 @@ useEffect(() => {
     fetchAllMembers(); 
     
   }, []);
+
   // Get unique wards for the dropdown
   const uniqueWards = ["All", ...new Set(members.map((m) => m["वार्ड_संख्या"]))]
     .filter(Boolean)
@@ -80,6 +84,12 @@ useEffect(() => {
 
   return (
     <div className="container-fluid py-4">
+
+        {showPdf && (
+                <MemberPDF
+                    members={members}
+                />
+            )}
       <div className="card shadow-sm border-0 rounded-4 overflow-hidden">
         {/* Header Section */}
         <div className="card-header bg-primary text-white p-4 border-0">
@@ -87,6 +97,9 @@ useEffect(() => {
             <div className="col-12 col-lg-4">
               <h3 className="mb-0 fw-bold">समाज के सदस्य</h3>
               <small className="opacity-75">कुल सदस्य: {members.length}</small>
+              <button className="btn btn-warning btn-sm ms-3" onClick={() => setShowPdf(true)}>
+                Print PDF
+              </button>
             </div>
             <div className="col-12 col-md-8 col-lg-5">
               <input

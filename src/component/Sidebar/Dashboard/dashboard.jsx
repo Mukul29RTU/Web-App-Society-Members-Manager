@@ -21,6 +21,29 @@ const Dashboard = () => {
 
   const colors = ["bg-primary", "bg-success", "bg-info", "bg-warning", "bg-danger"];
 
+  const handleDownloadPdf = async () =>{
+    const response = await api.get(
+        `${import.meta.env.VITE_API_BASE_URL}/pdf/members`,
+        {
+            responseType: "blob"
+        }
+    );
+
+    console.log(response);
+
+    const url = window.URL.createObjectURL(
+        new Blob([response.data])
+    );
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "members.pdf";
+
+    link.click();
+  }
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -56,7 +79,6 @@ const Dashboard = () => {
         }
 
       } catch (err) {
-        console.error("Fetch Error:", err);
         setError("डेटा लोड करने में विफल।");
       } finally {
         setLoading(false);
@@ -86,7 +108,9 @@ const Dashboard = () => {
     <div className="container-fluid py-2 animate__animated animate__fadeIn">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h3 className="fw-bold mb-0">Society Overview</h3>
-        <span className="text-muted small d-none d-sm-inline">March 2026</span>
+        <span className="text-muted small d-none d-sm-inline">
+          <button className="btn btn-sm btn-primary p-2" onClick={handleDownloadPdf}>PDF LIST</button>
+        </span>
       </div>
 
       {/* Top Stat Cards */}
