@@ -247,6 +247,8 @@ const MemberPDF = ({ members = [] }) => {
                         width: 80%;
                         border-collapse: collapse;
                         margin-top: 20px;
+                        margin-left: auto;
+                        margin-right: auto;
                         font-family: Arial, sans-serif;
                     }
 
