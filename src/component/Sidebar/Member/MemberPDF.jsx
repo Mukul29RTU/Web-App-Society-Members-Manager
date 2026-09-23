@@ -158,7 +158,7 @@ const MemberPDF = ({ members = [] }) => {
         }, 50);
     };
 
-    // Prepare data on-the-fly depending on the selected print button mode
+    // Prepare data dynamically based on the selected mode
     const getProcessedMembers = () => {
         if (printMode === "serial") {
             return [...members].sort((a, b) => {
@@ -170,32 +170,31 @@ const MemberPDF = ({ members = [] }) => {
         
         if (printMode === "ward") {
             return [...members].sort((a, b) => {
-                // Extract digits from strings like "वार्ड_संख्या 9"
+                // Look strictly for numbers inside the "वार्ड_संख्या" string (e.g., extracts 9 from "वार्ड_संख्या 9")
                 const matchA = String(a["वार्ड_संख्या"] || "").match(/\d+/);
                 const matchB = String(b["वार्ड_संख्या"] || "").match(/\d+/);
                 
-                // If a ward number exists, parse it. If not, mark it as null.
                 const numA = matchA ? parseInt(matchA[0], 10) : null;
                 const numB = matchB ? parseInt(matchB[0], 10) : null;
                 
-                // Push records with NO ward number (null) to the very bottom
-                if (numA === null && numB !== null) return 1;
-                if (numB === null && numA !== null) return -1;
-                if (numA === null && numB === null) return 0;
+                // CRITICAL CORRECTION: If there is no number, throw them to the very bottom
+                if (numA === null && numB !== null) return 1;  // 'a' goes to the bottom
+                if (numB === null && numA !== null) return -1; // 'b' goes to the bottom
+                if (numA === null && numB === null) return 0;  // keep original order if both are missing numbers
                 
-                // Normal ascending numerical sort (1, 2, 3...)
+                // Normal sequential sorting (1, 2, 3...)
                 return numA - numB;
             });
         }
         
-        return members; // Default unsorted list
+        return members; // Return the unsorted array for normal mode
     };
 
     const displayMembers = getProcessedMembers();
 
     return (
         <>
-            {/* Download Option Control Bar */}
+            {/* Download Options Panel */}
             <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap" }}>
                 <button 
                     onClick={() => triggerPrint("normal")} 
@@ -219,10 +218,10 @@ const MemberPDF = ({ members = [] }) => {
                 </button>
             </div>
 
-            {/* Document Printable Element Container */}
+            {/* Hidden/Printable DOM Element Layout Container */}
             <div ref={printRef} className="pdf-container" style={{ padding: "20px" }}>
                 
-                {/* CSS styles to guarantee crisp PDF grid lines */}
+                {/* Embedded global printing rules for rendering the CSS grid framework */}
                 <style>{`
                     @media print {
                         * {
@@ -240,7 +239,7 @@ const MemberPDF = ({ members = [] }) => {
 
                     .pdf-container th, 
                     .pdf-container td {
-                        border: 1px solid #000000; /* Sharp clean grid borders */
+                        border: 1px solid #000000; /* Sharp layout grid boundaries */
                         padding: 10px;
                         text-align: left;
                     }
