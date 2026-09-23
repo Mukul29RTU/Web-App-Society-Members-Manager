@@ -253,8 +253,9 @@ const MemberPDF = ({ members = [] }) => {
                     .pdf-container th, 
                     .pdf-container td {
                         border: 1px solid #000000; /* Sharp layout grid boundaries */
-                        padding: 10px;
+                        padding: 20px;
                         text-align: left;
+                        text-wrap: break-word; /* Ensure long text wraps within cells */
                     }
 
                     .pdf-container th {
