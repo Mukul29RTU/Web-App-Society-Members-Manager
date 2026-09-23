@@ -270,8 +270,9 @@ const MemberPDF = ({ members = [] }) => {
                 <table>
                     <thead>
                         <tr>
-                            <th>क्रमांक</th>
-                            {/* <th>नाम</th>
+                            <th>पूर्ण जानकारी</th>
+                            {/* <th>क्रमांक</th>
+                            <th>नाम</th>
                             <th>पता</th>
                             <th>मोबाइल</th> */}
                         </tr>
