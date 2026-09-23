@@ -211,7 +211,7 @@ const MemberPDF = ({ members = [] }) => {
             <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap" }}>
                 <button 
                     onClick={() => triggerPrint("normal")} 
-                    style={{ padding: "8px 16px", cursor: "pointer", backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "4px" }}
+                    style={{ padding: "8px 16px", cursor: "pointer", backgroundColor: "#ead83f", border: "1px solid #ccc", borderRadius: "4px" }}
                 >
                     Download Normal PDF
                 </button>
