@@ -136,7 +136,6 @@
 // };
 
 // export default MemberPDF;
-
 import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 
@@ -171,14 +170,21 @@ const MemberPDF = ({ members = [] }) => {
         
         if (printMode === "ward") {
             return [...members].sort((a, b) => {
-                // Regex matches digits inside "वार्ड_संख्या 9" strings
+                // Extract digits from strings like "वार्ड_संख्या 9"
                 const matchA = String(a["वार्ड_संख्या"] || "").match(/\d+/);
                 const matchB = String(b["वार्ड_संख्या"] || "").match(/\d+/);
                 
-                const numA = matchA ? parseInt(matchA[0], 10) : 0;
-                const numB = matchB ? parseInt(matchB[0], 10) : 0;
+                // If a ward number exists, parse it. If not, mark it as null.
+                const numA = matchA ? parseInt(matchA[0], 10) : null;
+                const numB = matchB ? parseInt(matchB[0], 10) : null;
                 
-                return numB - numA;
+                // Push records with NO ward number (null) to the very bottom
+                if (numA === null && numB !== null) return 1;
+                if (numB === null && numA !== null) return -1;
+                if (numA === null && numB === null) return 0;
+                
+                // Normal ascending numerical sort (1, 2, 3...)
+                return numA - numB;
             });
         }
         
