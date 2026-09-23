@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 
 const MemberPDF = ({ members }) => {
     const printRef = useRef(null);
-
+    console.log("Members in PDF:", members); // Debugging line to check the members prop
     const handlePrint = useReactToPrint({
         contentRef: printRef,
         documentTitle: "Member Report"
@@ -34,7 +34,7 @@ const MemberPDF = ({ members }) => {
                     <tbody>
                         {members.map((member, index) => (
                             <tr key={member["सदस्य_नंबर"] ?? index}>
-                                <td>{index + 1}</td>
+                                <td>{member["सदस्य_नंबर"]}</td>
                                 <td>{member["नाम"]}</td>
                                 <td>{member["पता"]}</td>
                                 <td>{member["संपर्क"]}</td>
