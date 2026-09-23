@@ -271,31 +271,25 @@ const MemberPDF = ({ members = [] }) => {
                     <thead>
                         <tr>
                             <th>क्रमांक</th>
-                            <th>नाम</th>
+                            {/* <th>नाम</th>
                             <th>पता</th>
-                            <th>मोबाइल</th>
+                            <th>मोबाइल</th> */}
                         </tr>
                     </thead>
 
-                    {/* <tbody>
+                    <tbody>
                         {displayMembers && displayMembers.map((member, index) => (
                             <tr key={member["सदस्य_नंबर"] ?? index}>
-                                <td>{member["सदस्य_नंबर"]}</td>
+                            <td>{"क्र." + member["सदस्य_नंबर"]} {member["नाम"]}  {member["पहचान"]} {member["पता"]} {member["संपर्क"]} {members["वार्ड_संख्या"]}</td>
+                                {/* <td>{member["सदस्य_नंबर"]}</td>
                                 <td>{member["नाम"]}</td>
                                 <td>{member["पता"]}</td>
-                                <td>{member["संपर्क"]}</td>
-                            </tr>
-                        ))}
-                    </tbody> */}
-
-                      <tbody>
-                        {displayMembers && displayMembers.map((member, index) => (
-                            <tr key={member["सदस्य_नंबर"] ?? index}>
-                                <td>{member["सदस्य_नंबर"]} {member["नाम"]} {member["पता"]} {member["संपर्क"]}</td>
-                    
+                                <td>{member["संपर्क"]}</td> */}
                             </tr>
                         ))}
                     </tbody>
+
+                
                 </table>
 
             </div>
