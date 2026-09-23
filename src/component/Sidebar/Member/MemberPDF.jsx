@@ -178,7 +178,7 @@ const MemberPDF = ({ members = [] }) => {
                 const numA = matchA ? parseInt(matchA[0], 10) : 0;
                 const numB = matchB ? parseInt(matchB[0], 10) : 0;
                 
-                return numA - numB;
+                return numB - numA;
             });
         }
         
