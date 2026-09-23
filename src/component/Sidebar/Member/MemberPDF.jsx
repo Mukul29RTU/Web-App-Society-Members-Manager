@@ -59,7 +59,8 @@ const MemberPDF = ({ members }) => {
   
     // Updated for react-to-print v3 specification
     const handlePrint = useReactToPrint({
-        content: () => printRef.current,
+        // content: () => printRef.current,
+        contentRef: printRef,
         documentTitle: "Member Report"
     });
 
