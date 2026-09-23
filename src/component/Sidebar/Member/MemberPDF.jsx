@@ -170,20 +170,33 @@ const MemberPDF = ({ members = [] }) => {
         
         if (printMode === "ward") {
             return [...members].sort((a, b) => {
-                // Look strictly for numbers inside the "वार्ड_संख्या" string (e.g., extracts 9 from "वार्ड_संख्या 9")
-                const matchA = String(a["वार्ड_संख्या"] || "").match(/\d+/);
-                const matchB = String(b["वार्ड_संख्या"] || "").match(/\d+/);
+                // 1. Extract ward numbers (e.g., extracts 9 from "वार्ड_संख्या 9")
+                const matchWardA = String(a["वार्ड_संख्या"] || "").match(/\d+/);
+                const matchWardB = String(b["वार्ड_संख्या"] || "").match(/\d+/);
                 
-                const numA = matchA ? parseInt(matchA[0], 10) : null;
-                const numB = matchB ? parseInt(matchB[0], 10) : null;
+                const wardA = matchWardA ? parseInt(matchWardA, 10) : null;
+                const wardB = matchWardB ? parseInt(matchWardB, 10) : null;
                 
-                // CRITICAL CORRECTION: If there is no number, throw them to the very bottom
-                if (numA === null && numB !== null) return 1;  // 'a' goes to the bottom
-                if (numB === null && numA !== null) return -1; // 'b' goes to the bottom
-                if (numA === null && numB === null) return 0;  // keep original order if both are missing numbers
+                // 2. Extract serial numbers for sub-sorting
+                const serialA = parseInt(a["सदस्य_नंबर"], 10) || 0;
+                const serialB = parseInt(b["सदस्य_नंबर"], 10) || 0;
+
+                // Rule A: If a ward number is missing, throw those members to the very bottom
+                if (wardA === null && wardB !== null) return 1;  
+                if (wardB === null && wardA !== null) return -1; 
                 
-                // Normal sequential sorting (1, 2, 3...)
-                return numA - numB;
+                // Rule B: If both are missing ward numbers, sub-sort them by serial number at the bottom
+                if (wardA === null && wardB === null) {
+                    return serialA - serialB;
+                }
+                
+                // Rule C: If they are in the SAME ward, sort them by serial number (सदस्य_नंबर)
+                if (wardA === wardB) {
+                    return serialA - serialB;
+                }
+                
+                // Rule D: Normal ascending ward number sort (1, 2, 3...)
+                return wardA - wardB;
             });
         }
         
@@ -218,10 +231,10 @@ const MemberPDF = ({ members = [] }) => {
                 </button>
             </div>
 
-            {/* Hidden/Printable DOM Element Layout Container */}
+            {/* Printable Layout Container */}
             <div ref={printRef} className="pdf-container" style={{ padding: "20px" }}>
                 
-                {/* Embedded global printing rules for rendering the CSS grid framework */}
+                {/* Embedded printing rules for crisp table grid borders */}
                 <style>{`
                     @media print {
                         * {
