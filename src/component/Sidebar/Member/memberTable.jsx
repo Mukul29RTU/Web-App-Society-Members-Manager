@@ -67,7 +67,7 @@ useEffect(() => {
       const searchLower = searchTerm.toLowerCase();
       const matchesSearch =
         m["नाम"]?.toLowerCase().includes(searchLower) ||
-        String(m["संपर्क"] || "").includes(searchTerm);
+        String(m["संपर्क"] || "").includes(searchTerm) || String(m["सदस्य_नंबर"] || "").includes(searchTerm);
 
       const matchesWard =
         selectedWard === "All" || m["वार्ड_संख्या"] === selectedWard;
